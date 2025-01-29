@@ -1,0 +1,258 @@
+
+/*
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+*/
+.login {
+
+   padding-top: 10px;
+}
+.login button {
+    background: #fff;
+    border: none;
+    color: #4CAF50;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    
+}
+
+.login button:hover {
+    background: #4CAF50;
+    color: white;
+}
+/*
+nav {
+    background: #333;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: #4CAF50;
+}
+*/
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-controls button {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.calendar-controls button:hover {
+    background: #45A049;
+}
+
+#commentsSection, #input-comments, #inputForm, #loginForm, #calendar, #event-list {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-date {
+    font-size: 0.8em;
+    color: gray;
+    margin-top: 10px;
+}
+
+.event-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    transition: box-shadow 0.3s;
+}
+
+.event-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-item h3, .event-item p {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    padding-left: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    border-radius: 5px;
+}
+
+button {
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color:#45A049;
+    background-color: #ffffff00;
+    padding-top: 8px;
+}
+
+button:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label, form textarea, form input, form button {
+    margin-bottom: 10px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#input-comments label {
+    font-weight: bold;
+}
+
+/* Calendar Controls Styles */
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Calendar Styles */
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.calendar th, .calendar td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar th {
+    background-color: #f4f4f4;
+    font-size: 0.7rem; /* Reduced font size for days of the week */
+    font-weight: bold;
+}
+
+.calendar td {
+    background-color: #fff;
+}
+
+.event-day span {
+    background-color: #ffeb3b!important; /* Highlight color */
+    color: #000;
+    border-radius: 10px; /* Optional: make the highlight circular */
+    padding: 5px;
+    text-align: center;
+}
+
+/* Event List Styles */
+#event-list {
+    margin-top: 20px;
+}
+
+.accordion .accordion-header {
+    cursor: pointer;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+.accordion .accordion-content {
+    display: none;
+    padding: 10px;
+    border-top: none;
+    border: 1px solid #ccc;
+}
+
+.accordion-header::after {
+    content: '\f0d7'; /* FontAwesome down arrow */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    float: right;
+    transition: transform 0.2s ease;
+}
+.accordion-header.active::after {
+    transform: rotate(180deg); /* Rotates the arrow up */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .calendar-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar-controls button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    #calendar{
+        padding: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-controls button {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}
+

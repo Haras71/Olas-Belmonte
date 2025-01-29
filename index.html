@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olas - Belmonte</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo às Olas - Belmonte</h1>
+    </header>
+    <nav>
+        <a href="index.html">História</a>
+        <a href="events.html">Eventos</a>
+        <a href="contacts.html">Onde estamos</a>
+    </nav>
+    <section id="history">
+        <div class="container history-container">
+            <div class="slider" id="slider">
+                <!-- Slider content -->
+                <div class="prev" onclick="changeSlide(-1)">&#10094;</div>
+                <div class="next" onclick="changeSlide(1)">&#10095;</div>
+            </div>
+            <div class="history-text" id="history-text">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 ALOS - Olas - Belmonte. Todos os direitos reservados.</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+</body>
+</html>

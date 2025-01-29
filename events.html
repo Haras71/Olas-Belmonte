@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olas - Belmonte - Eventos</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/eventos.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo às Olas - Belmonte</h1>
+    </header>
+    <nav>
+        <a href="index.html">História</a>
+        <a href="events.html">Eventos</a>
+        <a href="contacts.html">Onde estamos</a>
+    </nav>
+    <section id="events">
+        <div class="container">
+            <div class="card calendar-controls">
+                <button onclick="changeMonth(-1)">&#10094; Mês Anterior</button>
+                <span id="calendar-month-year"></span>
+                <button onclick="changeMonth(1)">Próximo Mês &#10095;</button>
+            </div>
+            <div id="calendar" class="card">
+                <!-- O calendário será renderizado aqui -->
+            </div>
+            <div id="event-list" class="card">
+                <!-- A lista de eventos será renderizada aqui -->
+            </div>
+            <div id="commentsSection" class="card">
+                <h2>O que dizem sobre a nossas gentes e terras:</h2>
+                <!-- A lista de comentários será renderizada aqui -->
+            </div>
+           
+            <div id="input-comments" class="card accordion">
+                <h3 class="accordion-header">Deixe um comentário</h3>
+                <div class="accordion-content">
+                    <form id="inputForm">
+                        <textarea id="inputText" name="inputText" required></textarea>
+                        <button type="submit">Submeter</button>
+                    </form>
+                </div>
+                <div>
+                    <form id="loginForm" style="display:none;">
+                        <label for="adminPassword">Senha do Moderador:</label>
+                        <input type="password" id="adminPassword" name="adminPassword">
+                        <button type="submit">Login</button>
+                    </form>
+                    <button id="showAdminLogin">Moderador</button>
+                    <button id="exitAdmin" style="display:none;">Sair do Modo Moderador</button>
+                    <button id="edit-calendar" style="display:none;">Editar Calendário</button> <!-- Button added here -->
+                </div>
+            </div>
+            
+            <script>
+                const adminPassword = "#Olano1974!";
+                let isAdmin = false;
+
+                // Reusable function to save comments
+                function saveComments(comments) {
+                    localStorage.setItem('comments', JSON.stringify(comments));
+                }
+
+                // Event listener: show admin login
+                document.getElementById('showAdminLogin').addEventListener('click', function () {
+                    document.getElementById('loginForm').style.display = 'block';
+                });
+
+                // Event listener: admin login form submission
+                document.getElementById('loginForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const enteredPassword = document.getElementById('adminPassword').value;
+                    if (enteredPassword === adminPassword) {
+                        document.getElementById('loginForm').style.display = 'none';
+                        document.getElementById('showAdminLogin').style.display = 'none';
+                        document.getElementById('exitAdmin').style.display = 'inline';  // changed to 'inline'
+                        document.getElementById('edit-calendar').style.display = 'inline';  // changed to 'inline'
+                        alert('Acesso como Moderador concedido!');
+                        isAdmin = true;
+                        displayStoredComments(true);
+                        toggleAdminFeatures(true);
+                    } else {
+                        alert('Senha incorreta. Acesso como Moderador negado.');
+                    }
+                });
+
+                // Event listener: admin exit button
+                document.getElementById('exitAdmin').addEventListener('click', function () {
+                    document.getElementById('exitAdmin').style.display = 'none';
+                    document.getElementById('edit-calendar').style.display = 'none';
+                    document.getElementById('showAdminLogin').style.display = 'block';
+                    alert('A sair do modo Moderador.');
+                    isAdmin = false;
+                    displayStoredComments(false);
+                    toggleAdminFeatures(false);
+                });
+
+                // Function to toggle admin features
+                function toggleAdminFeatures(isAdmin) {
+                    const editCalendarButton = document.getElementById('edit-calendar');
+                    console.log('Admin status:', isAdmin); // Debugging line
+                    console.log('Edit Calendar button element:', editCalendarButton); // Debugging line
+                    if (isAdmin) {
+                        editCalendarButton.style.display = 'inline';
+                        console.log('Setting display to inline'); // Debugging line
+                    } else {
+                        editCalendarButton.style.display = 'none';
+                        console.log('Setting display to none'); // Debugging line
+                    }
+                }
+
+                // Redirect to admin.html when Edit Calendar button is clicked
+                document.getElementById('edit-calendar').addEventListener('click', function() {
+                    window.location.href = 'admin.html';
+                });
+
+                // Event listener: user comment submission
+                document.getElementById('inputForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const inputText = document.getElementById('inputText').value;
+                    const date = new Date().toLocaleDateString();
+
+                    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+                    comments.push({ text: inputText, date: date, approved: false });
+                    saveComments(comments);
+
+                    alert('Comentário salvo!');
+                    document.getElementById('inputText').value = '';
+
+                    displayStoredComments(false);
+                });
+
+                // Function to display stored comments
+                function displayStoredComments(isAdmin = false) {
+                    const commentsSection = document.getElementById('commentsSection');
+                    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+                    commentsSection.innerHTML = '';
+
+                    comments.forEach((comment, index) => {
+                    if (comment.approved || isAdmin) {
+                        const commentDiv = document.createElement('div');
+                        commentDiv.className = 'card';
+                        const commentText = document.createElement('span');
+                        commentText.innerText = comment.text;
+
+                        const commentDate = document.createElement('div');
+                        commentDate.className = 'comment-date';
+                        commentDate.innerText = comment.date;
+
+                        commentDiv.appendChild(commentText);
+                        commentDiv.appendChild(commentDate);
+
+                        if (isAdmin) {
+                            if (!comment.approved) {
+                                const approveButton = document.createElement('button');
+                                approveButton.innerText = 'Aprovar';
+                                approveButton.onclick = () => approveComment(index);
+                                commentDiv.appendChild(approveButton);
+                            }
+
+                            const editButton = document.createElement('button');
+                            editButton.innerText = 'Editar';
+                            editButton.onclick = () => editComment(index);
+
+                            const deleteButton = document.createElement('button');
+                            deleteButton.innerText = 'Apagar';
+                            deleteButton.onclick = () => deleteComment(index);
+
+                            commentDiv.appendChild(editButton);
+                            commentDiv.appendChild(deleteButton);
+                            }
+
+                            commentsSection.appendChild(commentDiv);
+                        }
+                    });
+                }
+
+                function approveComment(index) {
+                    let comments = JSON.parse(localStorage.getItem('comments'));
+                    comments[index].approved = true;
+                    saveComments(comments);
+                    displayStoredComments(true);
+                }
+
+                function editComment(index) {
+                    let comments = JSON.parse(localStorage.getItem('comments'));
+                    const newComment = prompt('Edite comentário:', comments[index].text);
+                    if (newComment !== null) {
+                    comments[index].text = newComment;
+                    saveComments(comments);
+                    displayStoredComments(true);
+                    }
+                }
+
+                function deleteComment(index) {
+                    let comments = JSON.parse(localStorage.getItem('comments'));
+                    comments.splice(index, 1);
+                    saveComments(comments);
+                    displayStoredComments(true);
+                }
+
+                document.querySelectorAll('.accordion-header').forEach(header => {
+                    header.addEventListener('click', function () {
+                        const content = this.nextElementSibling;
+
+                        // Toggle accordion content
+                        content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+
+                        // Collapse all other accordion contents
+                        document.querySelectorAll('.accordion .accordion-content').forEach(otherContent => {
+                            if (otherContent !== content) {
+                                otherContent.style.display = 'none';
+                            }
+                        });
+
+                        // Toggle active class
+                        this.classList.toggle('active');
+                    });
+                });
+
+                document.addEventListener('DOMContentLoaded', () => displayStoredComments(false));
+            </script>
+            <script src="js/scripts.js"></script>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 ALOS - Olas - Belmonte. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olas - Belmonte - Contacts</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("VJD2hsKg6vqYhAD3q"); // Replace with your EmailJS User ID
+        })();
+
+        function sendMail(event) {
+            event.preventDefault();
+            emailjs.sendForm('service_zjti40t', 'template_icp7lc6', '#contact-form') // Replace with your EmailJS Service ID and Template ID
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Email sent successfully!');
+                    document.getElementById('contact-form').reset(); // Reset the form fields
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send email.');
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo às Olas - Belmonte</h1>
+    </header>
+    <nav>
+        <a href="index.html">História</a>
+        <a href="events.html">Eventos</a>
+        <a href="contacts.html">Onde estamos</a>
+    </nav>
+    <div id="container">
+        <section id="contacts">
+            <div class="container-contactos">
+                <div id="map" class="card-contact">
+                    <h3>Venha visitar-nos:</h3>
+                    <div id="map-coords">
+                        <iframe
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=-7.365%2C40.34%2C-7.28%2C40.42&layer=mapnik&marker=40.35423%2C-7.29189"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <h4>Lat: 40.35423 Long: -7.29189</h4>
+                    </div>
+                </div>
+                <div class="card-contact">
+                    <h4>Envie-nos uma mensagem:</h4>
+                    <form id="contact-form" onsubmit="sendMail(event)">
+                        <img src="images/olas.jpg" alt="Olas" style="max-height: auto;">
+                        <!--<label for="message">Mensagem:</label>-->
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <button type="submit">Enviar</button>
+                    </form>
+                    <div class="card-contact">
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/alao.olas.23" target="_blank" class="social-icon">
+                                <i class="fab fa-facebook-f"></i> Facebook
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank" class="social-icon">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2025 ALOS - Olas - Belmonte. Todos os direitos reservados.</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
