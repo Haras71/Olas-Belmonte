@@ -31,5 +31,5 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server running on https://olas-belmonte.onrender.com:3000');
+    console.log('Server running on https://olas-ohrr.onrender.com:3000');
 });
