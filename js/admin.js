@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveEvents() {
-        fetch('https://olas-ohrr.onrender.com:3000/events', {
+        fetch('https://olas-ohrr.onrender.com/events', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function loadEvents() {
-        fetch('https://olas-ohrr.onrender.com:3000/events')
+        fetch('https://olas-ohrr.onrender.com/events')
             .then(response => response.json())
             .then(data => {
                 events = data;
