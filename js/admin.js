@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function loadEvents() {
-        fetch('https://olas-belmonte.onrender.com/:3000/events')
+        fetch('https://olas-belmonte.onrender.com:3000/events')
             .then(response => response.json())
             .then(data => {
                 events = data;
