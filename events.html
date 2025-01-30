@@ -18,6 +18,7 @@
         <a href="events.html">Eventos</a>
         <a href="contacts.html">Onde estamos</a>
     </nav>
+    <!--
     <section id="events">
         <div class="container">
             <div class="card calendar-controls">
@@ -27,14 +28,33 @@
             </div>
             <div id="calendar" class="card">
                 <!-- O calendário será renderizado aqui -->
-            </div>
+           <!-- </div>
             <div id="event-list" class="card">
                 <!-- A lista de eventos será renderizada aqui -->
+           <!-- </div>-->
+            
+
+     <section id="events">
+        <div class="container">
+            <div class="card calendar-controls">
+                <button onclick="changeMonth(-1)">&#10094; Mês Anterior</button>
+                <span id="calendar-month-year"></span>
+                <button onclick="changeMonth(1)">Próximo Mês &#10095;</button>
             </div>
+            <div id="calendar" class="card">
+                <!-- O calendário será renderizado aqui -->
+            </div>
+    
+            <h2>Eventos</h2>
+            <div id="event-list"></div>
+
             <div id="commentsSection" class="card">
                 <h2>O que dizem sobre a nossas gentes e terras:</h2>
                 <!-- A lista de comentários será renderizada aqui -->
             </div>
+                    
+               <!-- </div>
+            </section>-->
            
             <div id="input-comments" class="card accordion">
                 <h3 class="accordion-header">Deixe um comentário</h3>
@@ -224,7 +244,7 @@
 
                 document.addEventListener('DOMContentLoaded', () => displayStoredComments(false));
             </script>
-            <script src="js/scripts.js"></script>
+            <script src="js/admin.js"></script>
         </div>
     </section>
     <footer>
