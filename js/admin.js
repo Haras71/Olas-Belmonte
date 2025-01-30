@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveEvents() {
-        fetch('http://localhost:3000/events', {
+        fetch('https://olas-belmonte.onrender.com:3000/events', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function loadEvents() {
-        fetch('http://localhost:3000/events')
+        fetch('https://olas-belmonte.onrender.com/:3000/events')
             .then(response => response.json())
             .then(data => {
                 events = data;
